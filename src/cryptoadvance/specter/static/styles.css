@@ -511,21 +511,22 @@ input:hover{
 }
 .balances-left-titles{
     display: flex;
-    width: 60%;
+    width: 50%;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 .balances-right-amounts{
     display: flex;
-    width: 40%;
+    width: 50%;
     flex-direction: column;
     align-items: flex-start;
 }
 .balances{
     display: flex;
-    line-height: 10px;
-    width: 25em;
+    line-height: 13px;
     padding: 15px;
+    padding-left: 5%;
+    width: 27em;
     background: var(--cmap-bg-lighter);
     border: 2px solid var(--cmap-border);
     border-radius: 4px;
@@ -533,14 +534,9 @@ input:hover{
     font-size: 1rem;
     margin: 5px;
 }
-.balances:hover{
-    font-size: 0.9em;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 5px;
+.balances-cell{
+    height: 1.5em;
+    padding-top: 0.5em;
 }
 .smaller-card:hover{
     border: 2px solid hsl(217, 15%, 55%);

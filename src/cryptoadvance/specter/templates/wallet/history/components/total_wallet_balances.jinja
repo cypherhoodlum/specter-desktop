@@ -10,17 +10,17 @@
         <span style="line-height:30px; font-size: 1.1em;">Balance:</span>
         <div class="balances">
             <div class="balances-left-titles">
-                <h3>Total amount:</h3>
+                <h3 class="balances-cell">Total amount:</h3>
                 {% if wallet.amount_unconfirmed > 0 or wallet.amount_immature > 0 %}
-                    <p>Confirmed:</p>
+                    <p class="balances-cell">Confirmed:</p>
                 {% endif %}
                 {% if (wallet.amount_unconfirmed > 0 or wallet.amount_immature > 0) and wallet.amount_unconfirmed > 0 %}
-                    <p>Unconfirmed:</p>
+                    <p class="balances-cell">Unconfirmed:</p>
                 {% endif %}
                 {% if wallet.amount_immature > 0 %}
-                    <p>
+                    <p class="balances-cell">
                         Immature:
-                        <tool-tip style="color: #fff" title='{{ _("What are immature outputs?") }}'>
+                        <tool-tip style="color: #fff; line-height: 20px;" title='{{ _("What are immature outputs?") }}'>
                             {{ _('The UTXO of coinbase transactions (mining rewards) have the special condition that they cannot be spent for at least 100 blocks. Their amount is not included in the total balance here. You see these outputs because you are using regtest and have mined blocks.') }}
                         </tool-tip>
                     </p>
@@ -28,7 +28,7 @@
             </div>
             <div class="balances-right-amounts">
                 <div>
-                    <h3 id="fullbalance_amount">{{ wallet.amount_total | btcunitamount }}
+                    <h4 class="balances-cell" id="fullbalance_amount"><span>{{ wallet.amount_total | btcunitamount }}</span>
                         {% if specter.unit == 'sat' %}
                             sats
                         {% else %}
@@ -37,12 +37,12 @@
                         {% if specter.price_check %} 
                             <span class="note">({{ wallet.amount_total | altunit }})</span>
                         {% endif %}
-                    </h3>
+                    </h4>
                 </div>
                 {% if wallet.amount_unconfirmed > 0 or wallet.amount_immature > 0 %}
                     <div>
-                        <p>
-                            {{ wallet.amount_confirmed | btcunitamount }}
+                        <p class="balances-cell">
+                            <span>{{ wallet.amount_confirmed | btcunitamount }}</span>
                             {% if specter.unit == 'sat' %}
                                 sats
                             {% else %}
@@ -55,8 +55,8 @@
                     </div>
                     {% if wallet.amount_unconfirmed > 0 %}
                     <div>
-                        <p>
-                            {{ wallet.amount_unconfirmed | btcunitamount }}
+                        <p class="balances-cell">
+                            <span>{{ wallet.amount_unconfirmed | btcunitamount }}</span>
                             {% if specter.unit == 'sat' %}
                                 sats
                             {% else %}
@@ -70,8 +70,8 @@
                     {% endif %}
                     {% if wallet.amount_immature > 0 and specter.chain == "regtest" %}
                     <div style="color: grey">
-                        <p>
-                            {{ wallet.amount_immature | btcunitamount }} 
+                        <p class="balances-cell">
+                            <span>{{ wallet.amount_immature | btcunitamount }}</span>
                             {% if specter.unit == 'sat' %}
                                 sats
                             {% else %}
@@ -85,7 +85,8 @@
                     {% endif %}
                     {% elif wallet.amount_immature > 0 and specter.chain == "main" %}
                     <div style="color: #ccc">
-                        {{ wallet.amount_immature | btcunitamount }} 
+                    <p class="balances-cell">
+                        <span>{{ wallet.amount_immature | btcunitamount }}</span>
                         {% if specter.unit == 'sat' %}
                             sats
                         {% else %}
@@ -94,6 +95,7 @@
                         {% if specter.price_check %} 
                             <span class="note" style="color: grey">({{ wallet.amount_immature | altunit }})</span>
                         {% endif %}
+                    <p>
                         <tool-tip style="color: #fff" title='{{ _("What are immature outputs?") }}'>
                             {{ _('The UTXO of coinbase transactions (mining rewards) have the special condition that they cannot be spent for at least 100 blocks. Their amount is not included in the total balance here.') }}
                         </tool-tip>
