@@ -27,51 +27,85 @@
                 {% endif %}
             </div>
             <div class="balances-right-amounts">
-                <div>
-                    <h4 class="balances-cell" id="fullbalance_amount"><span>{{ wallet.amount_total | btcunitamount }}</span>
-                        {% if specter.unit == 'sat' %}
-                            sats
-                        {% else %}
-                            {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
-                        {% endif %}
-                        {% if specter.price_check %} 
-                            <span class="note">({{ wallet.amount_total | altunit }})</span>
-                        {% endif %}
+                    <h4 class="balances-cell">
+                        <span class="balances-integer">{{ ((wallet.amount_total | btcunitamount)|string).split(",")[0] }}</span>
+                        <span class="balances-separator">{{ "," }}</span>
+                        <span class="balances-decimals">{{ ((wallet.amount_total | btcunitamount)|string).split(",")[1] }}</span>
+                        <span class="balances-unit">
+                            {% if specter.unit == 'sat' %}
+                                sats
+                            {% else %}
+                                {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
+                            {% endif %}
+                            {% if specter.price_check %} 
+                                <span class="note">({{ wallet.amount_total | altunit }})</span>
+                            {% endif %}
+                        </span>
                     </h4>
-                </div>
+                
                 {% if wallet.amount_unconfirmed > 0 or wallet.amount_immature > 0 %}
-                    <div>
+                    
                         <p class="balances-cell">
-                            <span>{{ wallet.amount_confirmed | btcunitamount }}</span>
-                            {% if specter.unit == 'sat' %}
-                                sats
-                            {% else %}
-                                {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
-                            {% endif %}
-                            {% if specter.price_check %} 
-                                <span class="note">({{ wallet.amount_confirmed | altunit }})</span>
-                            {% endif %}
+                            <span class="balances-integer">{{ ((wallet.amount_confirmed | btcunitamount)|string).split(",")[0] }}</span>
+                            <span class="balances-separator">{{ "," }}</span>
+                            <span class="balances-decimals">{{ ((wallet.amount_confirmed | btcunitamount)|string).split(",")[1] }}</span>
+                            <span class="balances-unit">
+                                {% if specter.unit == 'sat' %}
+                                    sats
+                                {% else %}
+                                    {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
+                                {% endif %}
+                                {% if specter.price_check %} 
+                                    <span class="note">({{ wallet.amount_confirmed | altunit }})</span>
+                                {% endif %}
+                            </span>
                         </p>
-                    </div>
+                    
                     {% if wallet.amount_unconfirmed > 0 %}
-                    <div>
+                    
                         <p class="balances-cell">
-                            <span>{{ wallet.amount_unconfirmed | btcunitamount }}</span>
-                            {% if specter.unit == 'sat' %}
-                                sats
-                            {% else %}
-                                {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
-                            {% endif %}
-                            {% if specter.price_check %} 
-                                <span class="note">({{ wallet.amount_unconfirmed | altunit }})</span>
-                            {% endif %}
+                            <span class="balances-integer">{{ ((wallet.amount_unconfirmed | btcunitamount)|string).split(",")[0] }}</span>
+                            <span class="balances-separator">{{ "," }}</span>
+                            <span class="balances-decimals">{{ ((wallet.amount_unconfirmed | btcunitamount)|string).split(",")[1] }}</span>
+                            <span class="balances-unit">
+                                {% if specter.unit == 'sat' %}
+                                    sats
+                                {% else %}
+                                    {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
+                                {% endif %}
+                                {% if specter.price_check %} 
+                                    <span class="note">({{ wallet.amount_unconfirmed | altunit }})</span>
+                                {% endif %}
+                            </span>
                         </p>
-                    </div>
+                    
                     {% endif %}
                     {% if wallet.amount_immature > 0 and specter.chain == "regtest" %}
-                    <div style="color: grey">
-                        <p class="balances-cell">
-                            <span>{{ wallet.amount_immature | btcunitamount }}</span>
+                    
+                        <p class="balances-cell" style="color: grey">
+                            <span class="balances-integer">{{ ((wallet.amount_immature | btcunitamount)|string).split(",")[0] }}</span>
+                            <span class="balances-separator">{{ "," }}</span>
+                            <span class="balances-decimals">{{ ((wallet.amount_immature | btcunitamount)|string).split(",")[1] }}</span>
+                            <span class="balances-unit">
+                                {% if specter.unit == 'sat' %}
+                                    sats
+                                {% else %}
+                                    {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
+                                {% endif %}
+                                {% if specter.price_check %} 
+                                    <span class="note" style="color: grey">({{ wallet.amount_immature | altunit }})</span>
+                                {% endif %}
+                            </span>
+                        </p>
+                    
+                    {% endif %}
+                    {% elif wallet.amount_immature > 0 and specter.chain == "main" %}
+                    
+                    <p class="balances-cell" style="color: #ccc">
+                        <span class="balances-integer">{{ ((wallet.amount_immature | btcunitamount)|string).split(",")[0] }}</span>
+                        <span class="balances-separator">{{ "," }}</span>
+                        <span class="balances-decimals">{{ ((wallet.amount_immature | btcunitamount)|string).split(",")[1] }}</span>
+                        <span class="balances-unit">
                             {% if specter.unit == 'sat' %}
                                 sats
                             {% else %}
@@ -80,26 +114,12 @@
                             {% if specter.price_check %} 
                                 <span class="note" style="color: grey">({{ wallet.amount_immature | altunit }})</span>
                             {% endif %}
-                        </p>
-                    </div>
-                    {% endif %}
-                    {% elif wallet.amount_immature > 0 and specter.chain == "main" %}
-                    <div style="color: #ccc">
-                    <p class="balances-cell">
-                        <span>{{ wallet.amount_immature | btcunitamount }}</span>
-                        {% if specter.unit == 'sat' %}
-                            sats
-                        {% else %}
-                            {% if specter.is_testnet %}t{%endif%}{% if specter.is_liquid %}L{%endif%}BTC
-                        {% endif %}
-                        {% if specter.price_check %} 
-                            <span class="note" style="color: grey">({{ wallet.amount_immature | altunit }})</span>
-                        {% endif %}
+                        </span>
                     <p>
                         <tool-tip style="color: #fff" title='{{ _("What are immature outputs?") }}'>
                             {{ _('The UTXO of coinbase transactions (mining rewards) have the special condition that they cannot be spent for at least 100 blocks. Their amount is not included in the total balance here.') }}
                         </tool-tip>
-                    </div>
+                    
                 </div>
             {% endif %}
         </div>

@@ -534,8 +534,25 @@ input:hover{
     margin: 5px;
 }
 .balances-cell{
+    display: flex;
+    width: 100%;
     height: 0.5em;
     padding-top: 0.5em;
+}
+.balances-integer{
+    width: 30%;
+    text-align: end;
+}
+.balances-separator{
+    width: 3%;
+}
+.balances-decimals{
+    width: 30%;
+    text-align: start;
+    background-color: #27b1f0;
+}
+.balances-unit{
+    width: 10%;
 }
 .smaller-card:hover{
     border: 2px solid hsl(217, 15%, 55%);
