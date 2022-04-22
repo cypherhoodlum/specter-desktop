@@ -12,13 +12,13 @@
             <div class="balances-left-titles">
                 <h3 class="balances-cell">Total amount:</h3>
                 {% if wallet.amount_unconfirmed > 0 or wallet.amount_immature > 0 %}
-                    <p class="balances-cell">Confirmed:</p>
+                    <p class="balances-cell {{'price' if specter.price_check }}">Confirmed:</p>
                 {% endif %}
                 {% if (wallet.amount_unconfirmed > 0 or wallet.amount_immature > 0) and wallet.amount_unconfirmed > 0 %}
-                    <p class="balances-cell">Unconfirmed:</p>
+                    <p class="balances-cell {{'price' if specter.price_check }}">Unconfirmed:</p>
                 {% endif %}
                 {% if wallet.amount_immature > 0 %}
-                    <p class="balances-cell">
+                    <p class="balances-cell {{'price' if specter.price_check }}">
                         Immature:
                         <tool-tip style="color: #fff; line-height: 20px;" title='{{ _("What are immature outputs?") }}'>
                             {{ _('The UTXO of coinbase transactions (mining rewards) have the special condition that they cannot be spent for at least 100 blocks. Their amount is not included in the total balance here. You see these outputs because you are using regtest and have mined blocks.') }}

@@ -554,6 +554,9 @@ input:hover{
 .balances-unit{
     width: 10%;
 }
+.price{
+    margin-top: 2.5em;
+}
 .smaller-card:hover{
     border: 2px solid hsl(217, 15%, 55%);
 }
